@@ -1,21 +1,19 @@
 import React, { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.css";
 function App() {
-
+const [enable,setenable]=useState(false);
 const [buy, newbuy] = useState(0);
 const [text,newtext]=useState('add to cart')
-  const handleClick = () => {
+  const clicked = () => {
    newtext('diasable from cart')
      newbuy(buy + 1);
+     setenable(true)
   }
-  const handle = () => {
-    newtext("add to cart");
-    newbuy(buy -1);
-  };
-  const clicked=()=>{
-    buy === 0 ? handleClick() : handle();
-  }
+const handler=()=>{
+  newbuy(buy-1);
+  setenable(true)
 
+}  
   
   
   return (
@@ -82,7 +80,11 @@ const [text,newtext]=useState('add to cart')
               </li>
             </ul>
             <form className="d-flex">
-              <button className="btn btn-outline-dark" type="submit">
+              <button
+                className="btn btn-outline-dark"
+                type="submit"
+                onClick={handler}
+              >
                 <i className="bi-cart-fill me-1"></i>
                 Cart
                 <span className="badge bg-dark text-white ms-1 rounded-pill">
@@ -168,6 +170,7 @@ const [text,newtext]=useState('add to cart')
                   <div className="text-center">
                     <button
                       className="btn btn-outline-dark mt-auto"
+                      disabled={enable}
                       onClick={clicked}
                     >
                       {text}
